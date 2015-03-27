@@ -1,0 +1,71 @@
+This program is a simple not definitive test software
+that has been written to test the behavior of the software
+in the project directory. It sends and receives spi data
+using a parallel port. 
+
+The program has some problems (I apologize!!!):
+
+- syncronization, then sometimes sends wrong data!
+- buffers, the dimension are not checked!
+
+This code runs only in super-user mode.
+
+To compile it run make all at the prompt:
+
+#make all <enter>
+
+pc_spi m stringcmd	sends a command to a slave receiver acting as master.
+
+Loop modes:
+
+pc_spi S 		starts the program as slave 
+pc_spi			starts as master
+
+This two command doesn't exits. They remain in loop acting as slave
+or master as set at start time.
+
+To exit from the loop type q
+
+To insert a string to send type s
+
+This software supports other line command. See the main function.
+
+This software (in loop mode) supports other keyboard command. See
+the keyboardCommand function.
+
+
+Master connection:
+Parallel port
+
+STROBE			Pin 1 (not used - In my environment is used to
+				drive a 74LS245)
+--------------------------------------------
+DO	(PC send)	Pin 2
+SCK	(PC master clk)	Pin 3
+CS	(PC master cs)	Pin 4
+DI	(PC receive)	Pin 10
+--------------------------------------------
+SCK 	(PC slave clk)	Pin 12
+CS	(PC slave cs)	Pin 13
+--------------------------------------------
+
+Then:
+
+If you use the PC as slave you have:
+
+SCK	Pin 12
+CS	Pin 13
+MISO	Pin 2
+MOSI	PIN 10
+
+If you use the PC as master you have:
+
+SCK	Pin 3
+CS	Pin 4
+MISO	Pin 10
+MOSI 	Pin 2
+
+
+
+
+

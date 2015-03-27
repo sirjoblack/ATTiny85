@@ -1,0 +1,8 @@
+The directory project contains the software for
+the AT Tiny 84/85 MCUs.
+
+The directory pc_spi contains an alfa software 
+that may be used for testing purpose.
+
+The directory doc contains documents about 
+the project.
