@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 A little fee is required if you use this software for business or
-industrial/commercial product.
+industrial/commercial products.
 */
 
 #ifndef H_TYPES_H_

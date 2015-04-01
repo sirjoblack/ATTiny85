@@ -112,7 +112,7 @@ void setup()
      * PLL, sets its own: CLKPR, TCCR1, TIFR and TMSK
      */
 
-    timer.begin(true);
+    timer.begin();
 }
 
 int main()

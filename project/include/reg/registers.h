@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 A little fee is required if you use this software for business or
-industrial/commercial product.
+industrial/commercial products.
 */
 #ifndef REGISTERS_H
 #define REGISTERS_H
@@ -25,5 +25,6 @@ industrial/commercial product.
 #include "regdport.h"
 #include "regtimer.h"
 #include "regusi.h"
+#include "regadc.h"
 
 #endif // REGISTERS_H
