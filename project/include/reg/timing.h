@@ -39,26 +39,6 @@ industrial/commercial products.
 #undef __AVR_Selected
 #endif
 
-/* (*1) */
-#ifdef ___tiny84
-#define RCLK_DIV(d)	((d<=1)?1UL:\
-		(d<=8+(64-8)/2)?8UL:\
-		(d<=64+(256-64)/2)?64UL:\
-		(d<=256+(1024-256)/2)?256UL:\
-		1024UL)
-#endif
-
-#ifdef ___tiny85
-#define RCLK_DIV(d)	((d<=1)?1UL:(d<=2)?2UL:\
-                    (d<=4+1)?4UL:(d<=8+3)?8UL:\
-                    (d<=16+7)?16UL:(d<=32+15)?32UL:\
-                    (d<=64+31)?64UL:(d<=128+63)?128UL:\
-                    (d<=256+127)?256UL:(d<=512+255)?512UL:\
-                    (d<=1024+511)?1024UL:(d<=2048+1023)?2048UL:\
-                    (d<=4096+2047)?4096UL:(d<=8192+4095)?8192UL:\
-                    (d<=16384+8191)?16384UL:16384UL)
-#endif
-
 /* (*2) */
 #define RCLKPS(d) 	((d<=1)?1UL:(d<=2)?2UL:\
                     (d<=4+1)?4UL:(d<=8+3)?8UL:\

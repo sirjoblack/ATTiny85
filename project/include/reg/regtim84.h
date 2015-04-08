@@ -18,10 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 A little fee is required if you use this software for business or
 industrial/commercial products.
 */
-
-
 #ifndef REGTIM84_H_
 #define REGTIM84_H_
+#include "h_types.h"
+#include "regmacros.h"
 /*
 GTCCR – General Timer/Counter Control Register
 Bit
@@ -68,9 +68,15 @@ Initial Value 0 0 0 0 0 0 0*/
 #define CS0_CLK_DIV256		CS0_0_2(4)
 #define CS0_CLK_DIV1024		CS0_0_2(5)
 #define CS0_CLK_EXT_FALLING_EDGE	CS0_0_2(6)
-#define CS0_CLK_EXT_RISING_EDGE		CS0_0_3(7)
+#define CS0_CLK_EXT_RISING_EDGE		CS0_0_2(7)
 
-/* (*2) */
+#define RCLK_DIV0(d) \
+    ((d<=1)?1UL:\
+    (d<=8+(64-8)/2)?8UL:\
+    (d<=64+(256-64)/2)?64UL:\
+    (d<=256+(1024-256)/2)?256UL:\
+    1024UL)
+
 #define SELCS0(d) \
 		((d<=1)?CS0_CLK_DIV1:\
 		(d<=8+(64-8)/2)?CS0_CLK_DIV8:\
@@ -118,7 +124,13 @@ Initial Value 0 0 0 0 0 0 0 0
 #define CS1_CLK_EXT_FALLING_EDGE	CS1_0_2(6)
 #define CS1_CLK_EXT_RISING_EDGE		CS1_0_3(7)
 
-/* (*2) */
+#define RCLK_DIV1(d) \
+    ((d<=1)?1UL:\
+    (d<=8+(64-8)/2)?8UL:\
+    (d<=64+(256-64)/2)?64UL:\
+    (d<=256+(1024-256)/2)?256UL:\
+    1024UL)
+
 #define SELCS1(d) \
 		((d<=1)?CS1_CLK_DIV1:\
 		(d<=8+(64-8)/2)?CS1_CLK_DIV8:\
@@ -185,7 +197,6 @@ Bit 		7 6 5     4 3 2      1      0
 #define OCIE1A		BV_(1)
 #define OCIE1B		BV_(2)
 #define ICIE1		BV_(5)
-
 
 #define TCNT0	REGDECLB(0x32)
 #define TCNT1	REGDECLW(0x2C)

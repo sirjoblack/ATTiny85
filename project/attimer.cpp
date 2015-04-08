@@ -61,7 +61,7 @@ void ATTimer::begin()
     //Disables timer OVF interrupts
     W_TIMSK &= ~W_TOIE;
 
-    W_TCCR = SELCS1(TCLK_DIV); // [ (*2) - register.h ]
+    W_TCCR = W_SELCS(TCLK_DIV); // [ (*2) - register.h ]
     nop();
 
     W_TIMSK |= W_TOIE;

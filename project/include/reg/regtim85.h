@@ -45,6 +45,29 @@ industrial/commercial products.
 //Bit 7     6     5 4 3     2    1    0
 //    FOC0A FOC0B – – WGM02 CS02 CS01 CS00
 #define TCCR0B              REGDECL(0x33)
+#define CS0_0_2(n)  		(n)
+#define CS0_STOP			CS0_0_2(0)
+#define CS0_CLK_DIV1		CS0_0_2(1)		//Without prescaler!
+#define CS0_CLK_DIV8		CS0_0_2(2)
+#define CS0_CLK_DIV64		CS0_0_2(3)
+#define CS0_CLK_DIV256		CS0_0_2(4)
+#define CS0_CLK_DIV1024		CS0_0_2(5)
+#define CS0_CLK_EXT_FALLING_EDGE	CS0_0_2(6)
+#define CS0_CLK_EXT_RISING_EDGE		CS0_0_2(7)
+
+#define RCLK_DIV0(d) \
+    ((d<=1)?1UL:\
+    (d<=8+(64-8)/2)?8UL:\
+    (d<=64+(256-64)/2)?64UL:\
+    (d<=256+(1024-256)/2)?256UL:\
+    1024UL)
+
+#define SELCS0(d) \
+    ((d<=1)?CS0_CLK_DIV1:\
+    (d<=8+(64-8)/2)?CS0_CLK_DIV8:\
+    (d<=64+(256-64)/2)?CS0_CLK_DIV64:\
+    (d<=256+(1024-256)/2)?CS0_CLK_DIV256:\
+    CS0_CLK_DIV1024)
 
 //TCNT0
 #define TCNT0               REGDECL(0x32)
@@ -79,15 +102,25 @@ industrial/commercial products.
 #define CS1_CLK_DIV8192		CS1_0_3(0xE)
 #define CS1_CLK_DIV16384	CS1_0_3(0xF)
 
-/* (*2) */
-#define SELCS1(d)			((d<=1)?CS1_CLK_DIV1:(d<=2)?CS1_CLK_DIV2:\
-							(d<=4+1)?CS1_CLK_DIV4:(d<=8+3)?CS1_CLK_DIV8:\
-							(d<=16+7)?CS1_CLK_DIV16:(d<=32+15)?CS1_CLK_DIV32:\
-							(d<=64+31)?CS1_CLK_DIV64:(d<=128+63)?CS1_CLK_DIV128:\
-							(d<=256+127)?CS1_CLK_DIV256:(d<=512+255)?CS1_CLK_DIV512:\
-							(d<=1024+511)?CS1_CLK_DIV1024:(d<=2048+1023)?CS1_CLK_DIV2048:\
-							(d<=4096+2047)?CS1_CLK_DIV4096:(d<=8192+4095)?CS1_CLK_DIV8192:\
-                            (d<=16384+8191)?CS1_CLK_DIV16384:CS1_CLK_DIV16384)
+#define RCLK_DIV1(d) \
+    ((d<=1)?1UL:(d<=2)?2UL:\
+    (d<=4+1)?4UL:(d<=8+3)?8UL:\
+    (d<=16+7)?16UL:(d<=32+15)?32UL:\
+    (d<=64+31)?64UL:(d<=128+63)?128UL:\
+    (d<=256+127)?256UL:(d<=512+255)?512UL:\
+    (d<=1024+511)?1024UL:(d<=2048+1023)?2048UL:\
+    (d<=4096+2047)?4096UL:(d<=8192+4095)?8192UL:\
+    (d<=16384+8191)?16384UL:16384UL)
+
+#define SELCS1(d) \
+    ((d<=1)?CS1_CLK_DIV1:(d<=2)?CS1_CLK_DIV2:\
+    (d<=4+1)?CS1_CLK_DIV4:(d<=8+3)?CS1_CLK_DIV8:\
+    (d<=16+7)?CS1_CLK_DIV16:(d<=32+15)?CS1_CLK_DIV32:\
+    (d<=64+31)?CS1_CLK_DIV64:(d<=128+63)?CS1_CLK_DIV128:\
+    (d<=256+127)?CS1_CLK_DIV256:(d<=512+255)?CS1_CLK_DIV512:\
+    (d<=1024+511)?CS1_CLK_DIV1024:(d<=2048+1023)?CS1_CLK_DIV2048:\
+    (d<=4096+2047)?CS1_CLK_DIV4096:(d<=8192+4095)?CS1_CLK_DIV8192:\
+    (d<=16384+8191)?CS1_CLK_DIV16384:CS1_CLK_DIV16384)
 
 //Bit  7 6     5     4     3     2    1    0
 //0x38 - OCF1A OCF1B OCF0A OCF0B TOV1 TOV0 -

@@ -26,8 +26,14 @@ industrial/commercial products.
 #include "reg/regtimer.h"
 #include "reg/interrupt.h"
 
-//REMEMBER that not all the clock divisor are correct!
-//In any case RCLK_DIV retrieves the nearest correct value!
+#ifdef WATCH_IS_TIMER0
+#define RCLK_DIV(d) RCLK_DIV0(d)
+#else
+#define RCLK_DIV(d) RCLK_DIV1(d)
+#endif
+
+//REMEMBER that not all the clock divisor are valid!
+//In any case RCLK_DIV retrieves the nearest valid value!
 #ifdef __AVR_ATtiny85__
 #define __AVR_Selected
 #define TCLK_DIV   RCLK_DIV(128UL)    //Minimum value with CLKPS_DIV is 16UL (see the relevant SELCS0)
@@ -56,6 +62,7 @@ industrial/commercial products.
 #define W_TOV_AT    TOV0_AT
 #define W_TOIE      TOIE0
 #define W_ISR       TIM0_OVF_VECT
+#define W_SELCS(d)  SELCS0(d)
 #else
 #define W_TCNT      TCNT1
 #define W_TIFR      TIFR1
@@ -65,6 +72,7 @@ industrial/commercial products.
 #define W_TOV_AT    TOV1_AT
 #define W_TOIE      TOIE1
 #define W_ISR       TIM1_OVF_VECT
+#define W_SELCS(d)  SELCS1(d)
 #endif
 
 #endif // ATTIMERDEFS_H

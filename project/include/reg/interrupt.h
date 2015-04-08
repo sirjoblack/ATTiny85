@@ -93,6 +93,8 @@ industrial/commercial products.
 #define USI_OVF_VECT	_VECTOR(16)
 #endif
 
+#define INT0_VECT       _VECTOR(1)
+
 #ifdef ___tiny84
 #undef ___tiny84
 #endif

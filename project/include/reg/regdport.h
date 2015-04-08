@@ -96,6 +96,11 @@ typedef uint8_t dport_st;
 #define PORTbit_from_SET(dport)   (uint8_t)dport
 #endif
 
+#define PORTINT0    PORTB
+#define DDRINT0     DDRB
+#define PININT0     PINB
+#define PINT0     PB2
+
 #ifdef ___tiny84
 #undef ___tiny84
 #endif
