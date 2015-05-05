@@ -99,7 +99,7 @@ void ATTimer::reset()
 uint16_t ATTimer::udelay(uint32_t usec)
 {
 #define CNT_ (W_TOV_AT - 0x10UL)
-    timer1_t t0;
+    wtimer_t t0;
     uint16_t remainder=usec%TTICK_us;
 
     //usec becomes the number of ticks!
@@ -108,13 +108,13 @@ uint16_t ATTimer::udelay(uint32_t usec)
     // is ">" so the "if" below is always executed!!! :)
     while(usec > (uint32_t)CNT_) {
         t0=W_TCNT;
-        while ((timer1_t)(W_TCNT-t0) < (timer1_t)CNT_);
-        usec-=(timer1_t)(W_TCNT-t0);
+        while ((wtimer_t)(W_TCNT-t0) < (wtimer_t)CNT_);
+        usec-=(uint32_t)(W_TCNT-t0);
     }
 
-    if ((timer1_t)usec) {
+    if ((wtimer_t)usec) {
         t0=W_TCNT;
-        while ((timer1_t)(W_TCNT-t0)<(timer1_t)usec);
+        while ((wtimer_t)(W_TCNT-t0)<(wtimer_t)usec);
     }
 #undef CNT_
 

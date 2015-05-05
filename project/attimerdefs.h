@@ -63,6 +63,8 @@ industrial/commercial products.
 #define W_TOIE      TOIE0
 #define W_ISR       TIM0_OVF_VECT
 #define W_SELCS(d)  SELCS0(d)
+
+typedef timer0_t wtimer_t;
 #else
 #define W_TCNT      TCNT1
 #define W_TIFR      TIFR1
@@ -73,6 +75,8 @@ industrial/commercial products.
 #define W_TOIE      TOIE1
 #define W_ISR       TIM1_OVF_VECT
 #define W_SELCS(d)  SELCS1(d)
+
+typedef timer1_t wtimer_t;
 #endif
 
 #endif // ATTIMERDEFS_H

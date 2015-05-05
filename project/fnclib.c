@@ -25,9 +25,15 @@ __FNC_MEMCPY()
 
 __FNC_MEMSET()
 
+/* #define __FNCLIB_PROTECTION */
+
 char * _strcpy(char *sd, char *ss)
 {
     int i=0;
+#ifdef __FNCLIB_PROTECTION
+    if (sd==NULL || ss==NULL)
+        return NULL;
+#endif
     do {
         *(sd+i)=*(ss+i);
         i++;
@@ -39,13 +45,39 @@ char * _strcpy(char *sd, char *ss)
 size_t _strlen(char *sd)
 {
     size_t i=0;
+
+#ifdef __FNCLIB_PROTECTION
+    if (sd==NULL)
+        return NULL;
+#endif
+
     while(*(sd+i))
         i++;
     return i;
 }
 
+int strchrpos(char *sd, int lp, char s)
+{
+#ifdef __FNCLIB_PROTECTION
+    if (sd==NULL)
+        return NULL;
+#endif
+
+    sd+=(++lp);
+    while(*sd!=0 && *sd!=s) {
+        sd++;lp++;
+    }
+
+    return (*sd!=0)?lp:-1;
+}
+
 char * _strchr(char *sd, char s)
 {
+#ifdef __FNCLIB_PROTECTION
+    if (sd==NULL)
+        return NULL;
+#endif
+
     while(*sd!=0 && *sd!=s)
         sd++;
 
@@ -54,9 +86,38 @@ char * _strchr(char *sd, char s)
 
 char * _strcat(char *sd,char *ss)
 {
+#ifdef __FNCLIB_PROTECTION
+    if (sd==NULL || ss==NULL)
+        return NULL;
+#endif
+
     return _strcpy(sd+_strlen(sd),ss);
 }
 
+char * strrev(char *s)
+{
+    size_t i,n;
+    char tmp;
+
+#ifdef __FNCLIB_PROTECTION
+    if (s==NULL)
+        return s;
+#endif
+    n=_strlen(s);
+    if (!n)
+        return s;
+
+    for(i=0;i<n/2;i++) {
+/*        s[i]^=s[n-i-1];
+        s[n-i-1]^=s[i];
+        s[i]^=s[n-i-1];*/
+        tmp=s[i];
+        s[i]=s[n-i-1];
+        s[n-i-1]=tmp;
+    }
+
+    return s;
+}
 int64_t _strntoll(char * x, ssize_t n_, unsigned int base)
 {
     uint64_t z=0, k;

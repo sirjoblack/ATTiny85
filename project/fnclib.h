@@ -105,6 +105,34 @@ extern "C" {
     char * _strchr(char *sd, char s);
     size_t _strlen(char *sd);
 
+    char * strrev(char *s);
+
+    /**
+     * @brief strchrpos
+     *      This function returns the position inside the string,
+     *      specified by sd, of the occurence of a char, specified
+     *      by s, that follows the char occurence that is in the
+     *      position specified by lp (-1=no pos, 0 to string
+     *      length-1).
+     *
+     * @param sd
+     *      The pointer of the string where the occurence is
+     *      searched.
+     *
+     * @param lp
+     *      The position of the last occurence or -1 if no
+     *      occurence has been still found.
+     *
+     * @param s
+     *      The character to search.
+     *
+     * @return
+     *      Returns -1 if no more occurences of the char specified
+     *      by s were found. A value from 0 to the sd string
+     *      length-1 if an occurence of s has been found.
+     */
+    int strchrpos(char *sd,int lp, char s);
+
     /**
     * @brief _strntoll
     *      This function converts n characters of a string in a
